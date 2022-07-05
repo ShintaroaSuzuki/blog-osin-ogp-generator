@@ -27,10 +27,7 @@ export class AppController {
     try {
       return await this.appService.generate({ title });
     } catch (e) {
-      throw new HttpException(
-        'Internal server error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new HttpException(e, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }
