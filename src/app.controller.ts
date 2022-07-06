@@ -1,11 +1,12 @@
 import {
   Controller,
   Get,
-  Post,
-  Body,
+  Res,
+  Query,
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { AppService } from './app.service';
 
 @Controller()
@@ -13,19 +14,19 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
-  @Post()
   async generate(
-    @Body()
-    { title }: { title: string },
+    @Query()
+    query: {
+      title: string;
+    },
+
+    @Res()
+    res: Response,
   ) {
-    if (!title)
+    if (!query)
       throw new HttpException('parameter is missing', HttpStatus.BAD_REQUEST);
     try {
-      return await this.appService.generate({ title });
+      res.send(await this.appService.generate(query.title));
     } catch (e) {
       throw new HttpException(e, HttpStatus.INTERNAL_SERVER_ERROR);
     }

@@ -4,11 +4,7 @@ import * as path from 'path';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
-  }
-
-  async generate({ title }: { title: string }): Promise<{ image: string }> {
+  async generate(title: string): Promise<Buffer> {
     try {
       const splitByMeasureWidth = (
         str: string,
@@ -64,10 +60,10 @@ export class AppService {
           lineY += TITLE_SIZE + TITLE_LINE_MARGIN_SIZE;
         });
 
-        return canvas.toDataURL();
+        return canvas.toBuffer('image/png');
       };
 
-      return { image: await generateOgp(title) };
+      return await generateOgp(title);
     } catch (e) {
       console.log(e);
     }
