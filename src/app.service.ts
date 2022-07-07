@@ -34,9 +34,10 @@ export class AppService {
           'background.png',
         );
         const TITLE_COLOR = '#000000';
-        const TITLE_SIZE = 72;
+        const TITLE_SIZE = 48;
         const TITLE_LINE_MARGIN_SIZE = 20;
-        const TITLE_MARGIN_X = 80;
+        const TITLE_MARGIN_X = 240;
+        const MARGIN_TOP = 320;
         const FONT_FAMILY = 'Noto Sans JP Medium';
         const FONT_PATH = path.join(
           __dirname,
@@ -60,9 +61,10 @@ export class AppService {
           CANVAS_WIDTH - TITLE_MARGIN_X,
           ctx,
         );
-        let lineY: number =
-          CANVAS_HEIGHT / 2 -
-          ((TITLE_SIZE + TITLE_LINE_MARGIN_SIZE) / 2) * (titleLines.length - 1);
+        let lineY: number = MARGIN_TOP;
+        // let lineY: number =
+        //   (CANVAS_HEIGHT + TITLE_SIZE) / 2 -
+        //   ((TITLE_SIZE + TITLE_LINE_MARGIN_SIZE) / 2) * (titleLines.length - 1);
         titleLines.forEach((line: string) => {
           const textWidth: number = ctx.measureText(line).width;
           ctx.fillText(line, (CANVAS_WIDTH - textWidth) / 2, lineY);
