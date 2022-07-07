@@ -34,9 +34,18 @@ export class AppService {
           'background.png',
         );
         const TITLE_COLOR = '#000000';
-        const TITLE_SIZE = 80;
+        const TITLE_SIZE = 72;
         const TITLE_LINE_MARGIN_SIZE = 20;
         const TITLE_MARGIN_X = 80;
+        const FONT_FAMILY = 'Noto Sans JP Medium';
+        const FONT_PATH = path.join(
+          __dirname,
+          '..',
+          'fonts',
+          'NotoSansJP-Medium.otf',
+        );
+
+        registerFont(FONT_PATH, { family: FONT_FAMILY });
 
         const canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         const ctx = canvas.getContext('2d');
@@ -44,7 +53,7 @@ export class AppService {
         const background = await loadImage(BACKGROUND_IMAGE_PATH);
         ctx.drawImage(background, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-        ctx.font = 'bold 28px sans-serif';
+        ctx.font = `${TITLE_SIZE}px ${FONT_FAMILY}`;
         ctx.fillStyle = TITLE_COLOR;
         const titleLines: string[] = splitByMeasureWidth(
           title,

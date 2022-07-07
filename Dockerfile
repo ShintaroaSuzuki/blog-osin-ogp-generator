@@ -5,6 +5,7 @@ COPY tsconfig.json ./
 COPY tsconfig.build.json ./
 COPY src ./src
 COPY images ./images
+COPY fonts ./fonts
 RUN yarn install
 RUN yarn build
 CMD ["yarn", "start:prod"]
