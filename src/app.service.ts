@@ -33,10 +33,10 @@ export class AppService {
           'images',
           'background.png',
         );
-        const TITLE_COLOR = '#000000';
-        const TITLE_SIZE = 48;
-        const TITLE_LINE_MARGIN_SIZE = 20;
-        const TITLE_MARGIN_X = 240;
+        const FONT_COLOR = '#000000';
+        const FONT_SIZE = 48;
+        const LINE_MARGIN_SIZE = 20;
+        const MARGIN_X = 240;
         const MARGIN_TOP = 320;
         const FONT_FAMILY = 'Noto Sans JP Medium';
         const FONT_PATH = path.join(
@@ -54,21 +54,21 @@ export class AppService {
         const background = await loadImage(BACKGROUND_IMAGE_PATH);
         ctx.drawImage(background, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-        ctx.font = `${TITLE_SIZE}px ${FONT_FAMILY}`;
-        ctx.fillStyle = TITLE_COLOR;
+        ctx.font = `${FONT_SIZE}px ${FONT_FAMILY}`;
+        ctx.fillStyle = FONT_COLOR;
         const titleLines: string[] = splitByMeasureWidth(
           title,
-          CANVAS_WIDTH - TITLE_MARGIN_X,
+          CANVAS_WIDTH - MARGIN_X,
           ctx,
         );
         let lineY: number = MARGIN_TOP;
         // let lineY: number =
-        //   (CANVAS_HEIGHT + TITLE_SIZE) / 2 -
-        //   ((TITLE_SIZE + TITLE_LINE_MARGIN_SIZE) / 2) * (titleLines.length - 1);
+        //   (CANVAS_HEIGHT + FONT_SIZE) / 2 -
+        //   ((FONT_SIZE + LINE_MARGIN_SIZE) / 2) * (titleLines.length - 1);
         titleLines.forEach((line: string) => {
           const textWidth: number = ctx.measureText(line).width;
           ctx.fillText(line, (CANVAS_WIDTH - textWidth) / 2, lineY);
-          lineY += TITLE_SIZE + TITLE_LINE_MARGIN_SIZE;
+          lineY += FONT_SIZE + LINE_MARGIN_SIZE;
         });
 
         return canvas.toBuffer('image/png');
